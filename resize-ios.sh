@@ -71,7 +71,7 @@ total=${#total[@]}
 # Iterate through files
 for image in $1/*.*; do
 	name=$(basename "$image"); ext="${name##*.}"; name="${name%.*}"
-	cp "$image" "$OUTPUT_PATH/${name}@3x.$ext"
+	convert "$image" "$OUTPUT_PATH/${name}@3x.$ext"
 	convert "$image" -resize 66.66% "$OUTPUT_PATH/${name}@2x.$ext"
 	convert "$image" -resize 33.33% "$OUTPUT_PATH/${name}.$ext"
 	((count++))

@@ -92,7 +92,7 @@ for image in $SOURCE_PATH/*.*; do
 		output="${name}.${ext}";
 	fi
 	
-	cp "$image" "$2/drawable-xxxhdpi/${output}"
+	convert "$image" $opt "$OUTPUT_PATH/drawable-xxxhdpi/${output}"
 	convert "$image" -resize 75% $opt "$OUTPUT_PATH/drawable-xxhdpi/${output}"
 	convert "$image" -resize 50% $opt "$OUTPUT_PATH/drawable-xhdpi/${output}"
 	convert "$image" -resize 37.5% $opt "$OUTPUT_PATH/drawable-hdpi/${output}"

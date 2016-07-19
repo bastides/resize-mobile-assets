@@ -73,7 +73,7 @@ mkdir -p "$OUTPUT_PATH/mipmap-xxxhdpi/"
 
 # Generate icon files
 OUTPUT_FILE="ic_launcher.png";
-cp "$SOURCE_FILE" "$OUTPUT_PATH/mipmap-xxxhdpi/$OUTPUT_FILE"
+convert "$SOURCE_FILE" "$OUTPUT_PATH/mipmap-xxxhdpi/$OUTPUT_FILE"
 convert "$SOURCE_FILE" -resize 75% "$OUTPUT_PATH/mipmap-xxhdpi/$OUTPUT_FILE"
 convert "$SOURCE_FILE" -resize 50% "$OUTPUT_PATH/mipmap-xhdpi/$OUTPUT_FILE"
 convert "$SOURCE_FILE" -resize 37.5% "$OUTPUT_PATH/mipmap-hdpi/$OUTPUT_FILE"
