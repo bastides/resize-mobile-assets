@@ -16,6 +16,8 @@ DESCRIPTION:
 
     <source_dir> - The source image directory. Images inside it should be in @3x sizing.
     <output_dir> - The destination path where assets will be generated.
+	
+	Image files with names ending with "Template" (e.g. "IconPlusTemplate.png") will be converted into template image sets.
 
     This script is depend on ImageMagick. So you must install ImageMagick first
     On OSX you can use 'sudo brew install ImageMagick' to install it
@@ -41,6 +43,37 @@ error() {
      local red="\033[1;31m"
      local normal="\033[0m"
      echo -e "[${red}ERROR${normal}] $1"
+}
+
+writeJSON() {
+	cat <<- EOT > "$IMAGESET_PATH/Contents.json"
+	{
+	 "images" : [
+	   {
+	     "idiom" : "universal",
+	     "filename" : "${name}.png",
+	     "scale" : "1x"
+	   },
+	   {
+	     "idiom" : "universal",
+	     "filename" : "${name}@2x.png",
+	     "scale" : "2x"
+	   },
+	   {
+	     "idiom" : "universal",
+	     "filename" : "${name}@3x.png",
+	     "scale" : "3x"
+	   }
+	 ],
+	 "info" : {
+	   "version" : 1,
+	   "author" : "xcode"
+	 },
+	 "properties" : {
+	   "template-rendering-intent" : "${intent}"
+	 }
+	}
+	EOT
 }
 
 # Check ImageMagick
@@ -71,9 +104,20 @@ total=${#total[@]}
 # Iterate through files
 for image in $1/*.*; do
 	name=$(basename "$image"); ext="${name##*.}"; name="${name%.*}"
-	convert "$image" "$OUTPUT_PATH/${name}@3x.$ext"
-	convert "$image" -resize 66.66% "$OUTPUT_PATH/${name}@2x.$ext"
-	convert "$image" -resize 33.33% "$OUTPUT_PATH/${name}.$ext"
+	IMAGESET_PATH="$OUTPUT_PATH/${name}.imageset"
+	mkdir -p "$IMAGESET_PATH"
+	convert "$image" "$IMAGESET_PATH/${name}@3x.$ext"
+	convert "$image" -resize 66.66% "$IMAGESET_PATH/${name}@2x.$ext"
+	convert "$image" -resize 33.33% "$IMAGESET_PATH/${name}.$ext"
+	
+	if [[ "${name}" == *Template ]]; then
+		intent="template"
+	else
+		intent="original"
+	fi
+	
+	writeJSON
+	
 	((count++))
 	percent=$((count * 100 / total))
 	echo -ne "Generating assets: ${percent}%\r"
