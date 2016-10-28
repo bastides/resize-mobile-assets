@@ -51,17 +51,17 @@ writeJSON() {
 	 "images" : [
 	   {
 	     "idiom" : "universal",
-	     "filename" : "${name}.png",
+	     "filename" : "${name}.${ext}",
 	     "scale" : "1x"
 	   },
 	   {
 	     "idiom" : "universal",
-	     "filename" : "${name}@2x.png",
+	     "filename" : "${name}@2x.${ext}",
 	     "scale" : "2x"
 	   },
 	   {
 	     "idiom" : "universal",
-	     "filename" : "${name}@3x.png",
+	     "filename" : "${name}@3x.${ext}",
 	     "scale" : "3x"
 	   }
 	 ],
