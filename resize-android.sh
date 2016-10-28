@@ -66,7 +66,7 @@ fi
 
 # Check if WebP format is being used
 if [[ $3 == "--webp" ]]; then
-	echo "Converting to WebP format"
+	echo "JPGs will be converted to WebP format"
 fi
 
 # Count number of files to process
@@ -87,10 +87,7 @@ for image in $SOURCE_PATH/*.*; do
 	name=$(basename "$image"); ext="${name##*.}"; name="${name%.*}"; opt="";
 	if [ "$3" == "--webp" ] && [ "$ext" == "jpg" ]; then
 		output="${name}.webp";
-		opt="-quality 70 -define webp:lossless=false"
-#	elif [ "$3" == "--webp" ] && [ "$ext" == "png" ]; then
-#		output="${name}.webp";
-#		opt="-quality 80 -define webp:lossless=false"
+		opt="-quality 85 -define webp:lossless=false"
 	else
 		output="${name}.${ext}";
 	fi
