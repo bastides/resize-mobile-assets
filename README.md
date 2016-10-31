@@ -7,6 +7,10 @@ Bash scripts for resizing *Android* and *iOS* images assets.
 - `resize-ios.sh` for iOS assets (@1x to @3x)
 - `resize-ios-icon.sh` for iOS and iWatch app icons
 
+Additional tools:
+
+- `grid-android.sh` overlays Android gridlines over layout images and saves the output as a new file
+
 ## Instructions
 
 Run each script without parameters to display usage instructions, e.g. `./resize-android.sh`.
