@@ -73,6 +73,7 @@ writeJSON() {
 	   "template-rendering-intent" : "${intent}"
 	 }
 	}
+	
 	EOT
 }
 
