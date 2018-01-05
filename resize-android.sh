@@ -83,7 +83,7 @@ mkdir -p "$OUTPUT_PATH/drawable-xxhdpi/"
 mkdir -p "$OUTPUT_PATH/drawable-xxxhdpi/"
 
 # Iterate through files
-for image in "${SOURCE_PATH}/*.*"; do
+for image in $SOURCE_PATH/*.*; do
 	name=$(basename "$image"); ext="${name##*.}"; name="${name%.*}"; opt="";
 	if [ "$3" == "--webp" ] && [ "$ext" == "jpg" ]; then
 		output="${name}.webp";
@@ -98,7 +98,7 @@ for image in "${SOURCE_PATH}/*.*"; do
 	convert "$image" -resize 37.5% $opt "$OUTPUT_PATH/drawable-hdpi/${output}"
 	convert "$image" -resize 25% $opt "$OUTPUT_PATH/drawable-mdpi/${output}"
 	convert "$image" -resize 18.75% $opt "$OUTPUT_PATH/drawable-ldpi/${output}"
-	((count++))
+	(( count = count + 1 ))
 	percent=$((count * 100 / total))
 	echo -ne "Generating assets: ${percent}%\r"
 done
