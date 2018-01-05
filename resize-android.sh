@@ -83,7 +83,7 @@ mkdir -p "$OUTPUT_PATH/drawable-xxhdpi/"
 mkdir -p "$OUTPUT_PATH/drawable-xxxhdpi/"
 
 # Iterate through files
-for image in $SOURCE_PATH/*.*; do
+for image in "${SOURCE_PATH}/*.*"; do
 	name=$(basename "$image"); ext="${name##*.}"; name="${name%.*}"; opt="";
 	if [ "$3" == "--webp" ] && [ "$ext" == "jpg" ]; then
 		output="${name}.webp";
